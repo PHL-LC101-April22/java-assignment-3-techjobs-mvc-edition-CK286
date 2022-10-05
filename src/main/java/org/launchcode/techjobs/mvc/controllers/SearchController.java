@@ -25,7 +25,7 @@ public class SearchController {
 
    @PostMapping(value = "results")
     public String displaySearchResults(Model model,@RequestParam String searchTerm,@RequestParam String searchType){
-
+       model.addAttribute("columns", columnChoices);
         return "search";
    }
 }
