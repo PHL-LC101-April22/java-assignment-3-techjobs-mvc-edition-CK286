@@ -34,10 +34,12 @@ public class SearchController {
 
         if (searchTerm.equalsIgnoreCase("all") || searchTerm.isEmpty()) {
             jobs = JobData.findAll();
+            model.addAttribute("title", "All Jobs");
             model.addAttribute("jobs", jobs);
         }
         else{
             jobs = JobData.findByColumnAndValue(searchType,searchTerm);
+            model.addAttribute("title", "Jobs with " + searchType + ": " + searchTerm);
             model.addAttribute("jobs", jobs);
         }
 
