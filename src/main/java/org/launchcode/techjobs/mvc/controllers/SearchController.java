@@ -28,18 +28,20 @@ public class SearchController {
 
 
     @PostMapping("results")
-    public String displaySearchResults(Model model, @RequestParam String searchTerm, @RequestParam String searchType) {
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         ArrayList<Job> jobs;
+        model.addAttribute("columns", columnChoices);
 
         if (searchTerm.equalsIgnoreCase("all") || searchTerm.isEmpty()) {
             jobs = JobData.findAll();
-
+            model.addAttribute("jobs", jobs);
         }
         else{
             jobs = JobData.findByColumnAndValue(searchType,searchTerm);
+            model.addAttribute("jobs", jobs);
         }
-        model.addAttribute("columns", columnChoices);
-        model.addAttribute("jobs", jobs);
+
+
         return "search";
     }
 
